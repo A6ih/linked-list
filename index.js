@@ -134,10 +134,19 @@ class LinkedList {
         const splitNode = current.nextNode;
         current.nextNode = node;
         node.nextNode = splitNode;
+        this.size++;
         return;
       }
       current = current.nextNode;
       count++;
+    }
+  }
+
+  removeAt(index) {
+    if (index === 0) {
+      const newHead = this.head.nextNode;
+      this.head = newHead;
+      return;
     }
   }
 }
@@ -152,8 +161,9 @@ list.prepend("elephant");
 list.append("lion");
 list.prepend("monkey");
 list.append("gorilla");
-list.insertAt("donkey", 9);
+list.insertAt("donkey", 0);
 
 console.log(list.toString());
 console.log(list.head);
 console.log(list.tail);
+console.log(list.size);
