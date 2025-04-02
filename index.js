@@ -146,7 +146,28 @@ class LinkedList {
     if (index === 0) {
       const newHead = this.head.nextNode;
       this.head = newHead;
+      this.size--
       return;
+    }
+    if (index === this.size - 1) {
+        return this.pop();
+    }
+    if (index >= this.size) {
+        return console.log("This index does not exist in the list")
+    }
+
+    let current = this.head
+    let count = 0;
+
+    while(current) {
+        if(index === count + 1) {
+            const splitNode = current.nextNode
+            current.nextNode = splitNode.nextNode
+            this.size--
+            return;
+        }
+        current = current.nextNode;
+        count++;
     }
   }
 }
@@ -161,9 +182,7 @@ list.prepend("elephant");
 list.append("lion");
 list.prepend("monkey");
 list.append("gorilla");
-list.insertAt("donkey", 0);
+list.removeAt(6);
 
 console.log(list.toString());
-console.log(list.head);
-console.log(list.tail);
 console.log(list.size);
