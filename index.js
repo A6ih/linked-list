@@ -103,12 +103,41 @@ class LinkedList {
       if (count === 0) {
         string += `( ${current.value} )`;
       } else if (current.nextNode === null) {
-        return string += ` -> ( ${current.value} ) -> ${current.nextNode}`
+        return (string += ` -> ( ${current.value} ) -> ${current.nextNode}`);
       } else {
-        string+= ` -> ( ${current.value} )`
+        string += ` -> ( ${current.value} )`;
       }
-      count++
-      current = current.nextNode
+      count++;
+      current = current.nextNode;
+    }
+  }
+
+  insertAt(value, index) {
+    if (index === 0) {
+      return this.prepend(value);
+    }
+    if (index === this.size) {
+      return this.append(value);
+    }
+    if (index > this.size) {
+      return console.log(
+        "Index exceeded the list size, please use append() method to add to the end of the list"
+      );
+    }
+
+    const node = new Node(value);
+    let current = this.head;
+    let count = 0;
+
+    while (current) {
+      if (index === count + 1) {
+        const splitNode = current.nextNode;
+        current.nextNode = node;
+        node.nextNode = splitNode;
+        return;
+      }
+      current = current.nextNode;
+      count++;
     }
   }
 }
@@ -123,5 +152,8 @@ list.prepend("elephant");
 list.append("lion");
 list.prepend("monkey");
 list.append("gorilla");
+list.insertAt("donkey", 9);
 
 console.log(list.toString());
+console.log(list.head);
+console.log(list.tail);
